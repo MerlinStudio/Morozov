@@ -25,23 +25,28 @@ namespace Zenject.SpaceFighter
             _settings = settings;
             _bulletFactory = bulletFactory;
             _inputState = inputState;
+            _settings.AngleShoot = 20;
         }
 
         public void Tick()
         {
+
             if (_player.IsDead)
             {
                 return;
             }
 
+            _settings.MaxShootInterval = 0.5f;
             if (_inputState.IsFiring && Time.realtimeSinceStartup - _lastFireTime > _settings.MaxShootInterval)
             {
                 _lastFireTime = Time.realtimeSinceStartup;
-                Fire();
+                Fire(0);
+                Fire(_settings.AngleShoot);
+                Fire(-_settings.AngleShoot);
             }
         }
 
-        void Fire()
+        void Fire(float angle)
         {
             _audioPlayer.Play(_settings.Laser, _settings.LaserVolume);
 
@@ -49,7 +54,7 @@ namespace Zenject.SpaceFighter
                 _settings.BulletSpeed, _settings.BulletLifetime, BulletTypes.FromPlayer);
 
             bullet.transform.position = _player.Position + _player.LookDir * _settings.BulletOffsetDistance;
-            bullet.transform.rotation = _player.Rotation;
+            bullet.transform.rotation = _player.Rotation * Quaternion.Euler(0, 0, angle);
         }
 
         [Serializable]
@@ -62,6 +67,7 @@ namespace Zenject.SpaceFighter
             public float BulletSpeed;
             public float MaxShootInterval;
             public float BulletOffsetDistance;
+            public float AngleShoot;
         }
     }
 }
