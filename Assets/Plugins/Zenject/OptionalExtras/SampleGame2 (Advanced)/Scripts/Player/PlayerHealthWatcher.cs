@@ -42,7 +42,8 @@ namespace Zenject.SpaceFighter
 
             _player.Renderer.enabled = false;
 
-            _signalBus.Fire<PlayerDiedSignal>();
+            GameOver.instance.OpenWindowGameOver();
+            //_signalBus.Fire<PlayerDiedSignal>();
 
             _audioPlayer.Play(_settings.DeathSound, _settings.DeathSoundVolume);
         }
