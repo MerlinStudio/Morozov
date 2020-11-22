@@ -31,6 +31,12 @@ namespace Zenject.SpaceFighter
             {
                 Die();
             }
+            if (GameOver.isContinue)
+            {
+                _player.Continue();
+                GameOver.isContinue = false;
+            }
+
         }
 
         void Die()
@@ -44,9 +50,10 @@ namespace Zenject.SpaceFighter
 
             GameOver.instance.OpenWindowGameOver();
             //_signalBus.Fire<PlayerDiedSignal>();
-
             _audioPlayer.Play(_settings.DeathSound, _settings.DeathSoundVolume);
         }
+
+
 
         [Serializable]
         public class Settings

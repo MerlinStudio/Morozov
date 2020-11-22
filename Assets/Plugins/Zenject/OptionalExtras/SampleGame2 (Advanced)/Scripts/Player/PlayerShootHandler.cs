@@ -25,7 +25,7 @@ namespace Zenject.SpaceFighter
             _settings = settings;
             _bulletFactory = bulletFactory;
             _inputState = inputState;
-            _settings.AngleShoot = 20;
+
         }
 
         public void Tick()

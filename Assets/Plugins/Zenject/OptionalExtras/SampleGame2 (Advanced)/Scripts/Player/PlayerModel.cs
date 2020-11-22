@@ -30,6 +30,7 @@ namespace Zenject.SpaceFighter
         public float Health
         {
             get { return _health; }
+            set { }
         }
 
         public Vector3 LookDir
@@ -62,6 +63,13 @@ namespace Zenject.SpaceFighter
         public void AddForce(Vector3 force)
         {
             _rigidBody.AddForce(force);
+        }
+
+        public void Continue()
+        {
+            _health = 100;
+            Renderer.enabled = true;
+            IsDead = false;
         }
     }
 }

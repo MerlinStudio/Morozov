@@ -59,6 +59,13 @@ namespace Zenject.SpaceFighter
                 return;
             }
 
+            if (GameOver.isContinue)
+            {
+                _stateManager.ChangeState(EnemyStates.Attack);
+                MonoBehaviour.print("1");
+                return;
+            }
+
             _rotationHandler.DesiredLookDir = (_player.Position - _view.Position).normalized;
 
             // Strafe back and forth over the given interval
